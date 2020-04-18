@@ -8,10 +8,17 @@ public class AnimatedText : MonoBehaviour {
     public GameObject txt;
     public float OldSpeed = 0.04f;
     public float speed = 0.004f;
+    public bool enabledOnCreation;
     public IEnumerator Create(string txtStr, float timeToWait){
         yield return StartCoroutine(AnimateText(txtStr, speed));
         Destroy(gameObject, timeToWait);
         //gameObject.SetActive(false);
+    }
+
+    void Start()
+    {
+        if(enabledOnCreation)
+            StartCoroutine(Create(str, 10000f));
     }
 
     IEnumerator AnimateText(string strComplete, float spd){

@@ -22,4 +22,22 @@ public class TempButtons : MonoBehaviour
         StartCoroutine(contr.GetComponent<Main>().CheckingEvent());
     }
 
+    public void AllowIntoHive()
+    {
+        //say "yeah you can go on in"
+        //move bee into the right
+    }
+
+    public void TurnAway()
+    {
+        //say no
+        //bee moves to the left
+    }
+
+    public void Query()
+    {
+        //open the 'query' subdialog
+        //select two items to be queried
+    }
+
 }

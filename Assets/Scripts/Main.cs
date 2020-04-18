@@ -6,12 +6,13 @@ public enum IDRegion
 {
     Board,
     Overworld,
-    ViewMore
+    ViewMore,
+    StampZone
 }
 
 public class Main : MonoBehaviour
 {
-    public GameObject beeSprite;
+    public Sprite[] beeSprites;
     public GameObject speechbubblesprite;
     public float waitTime;
     public float papersSpeed;
@@ -44,11 +45,13 @@ public class Main : MonoBehaviour
     public IEnumerator CheckingEvent()
     {
         Debug.Log("made a bee");
-        GameObject currBee = Instantiate(beeSprite, new Vector2(-12f, 4f), Quaternion.identity);
+        //when making a bee it should make a random selection of bee attributes.
+        GameObject currBee = MakeNewBee();
+        currBee.transform.position = new Vector2(-12f, 4f);
         yield return StartCoroutine(Main.main.MoveFromTo(currBee.transform, currBee.transform.position,
-            new Vector2(-3f, 1f), flySpeed));
+            new Vector2(-3.2f, 3.5f), flySpeed));
         yield return Main.main.waitYi;
-        yield return StartCoroutine(Main.main.SpeechBubble("BZZZZZ", speechWait, new Vector2(-3.5f, 3f)));
+        yield return StartCoroutine(Main.main.SpeechBubble("BZZZZZ", speechWait, new Vector2(-3.5f, 5f)));
         yield return waitYi;
         yield return HandPapersOver(currBee);
         //make some sprite appear from the left
@@ -109,4 +112,10 @@ public class Main : MonoBehaviour
         return overworld.Contains(tr.position) ? IDRegion.Overworld : boardRect.Contains(tr.position) ?
             IDRegion.Board : IDRegion.ViewMore;
     } 
+
+    public GameObject MakeNewBee()
+    {
+        int i = Random.Range(0, beeSprites.Length);
+        return Instantiate();
+    }
 }
